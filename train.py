@@ -15,6 +15,7 @@ from yolo3.utils import get_random_data
 
 import os
 TPU_WORKER = 'grpc://' + os.environ['COLAB_TPU_ADDR']
+strategy = keras_support.TPUDistributionStrategy(tpu_cluster_resolver)
 
 
 def _main():
@@ -54,11 +55,10 @@ def _main():
     # Train with frozen layers first, to get a stable loss.
     # Adjust num epochs to your dataset. This step is enough to obtain a not bad model.
     if True:
+        model = keras_support.tpu_model(model, strategy)
         model.compile(optimizer=Adam(lr=1e-3), loss={
             # use custom yolo_loss Lambda layer.
             'yolo_loss': lambda y_true, y_pred: y_pred})
-        model = tf.contrib.tpu.keras_to_tpu_model(model, strategy=tf.contrib.tpu.TPUDistributionStrategy(
-            tf.contrib.cluster_resolver.TPUClusterResolver(TPU_WORKER)))
 
         batch_size = 32
         print('Train on {} samples, val on {} samples, with batch size {}.'.format(num_train, num_val, batch_size))
@@ -76,9 +76,8 @@ def _main():
     if True:
         for i in range(len(model.layers)):
             model.layers[i].trainable = True
+        model = keras_support.tpu_model(model, strategy)
         model.compile(optimizer=Adam(lr=1e-4), loss={'yolo_loss': lambda y_true, y_pred: y_pred}) # recompile to apply the change
-        model = tf.contrib.tpu.keras_to_tpu_model(model, strategy=tf.contrib.tpu.TPUDistributionStrategy(
-            tf.contrib.cluster_resolver.TPUClusterResolver(TPU_WORKER)))
         print('Unfreeze all of the layers.')
 
         batch_size = 32 # note that more GPU memory is required after unfreezing the body
