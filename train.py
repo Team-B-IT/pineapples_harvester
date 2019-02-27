@@ -58,7 +58,7 @@ def _main():
         model.compile(optimizer=Adam(lr=1e-3), loss={
             # use custom yolo_loss Lambda layer.
             'yolo_loss': lambda y_true, y_pred: y_pred})
-        model = tf.contrib.tpu.keras_to_tpu_model(model, , strategy=tf.contrib.tpu.TPUDistributionStrategy(
+        model = tf.contrib.tpu.keras_to_tpu_model(model, strategy=tf.contrib.tpu.TPUDistributionStrategy(
             tf.contrib.cluster_resolver.TPUClusterResolver(TPU_WORKER)))
 
         batch_size = 32
@@ -78,7 +78,7 @@ def _main():
         for i in range(len(model.layers)):
             model.layers[i].trainable = True
         model.compile(optimizer=Adam(lr=1e-4), loss={'yolo_loss': lambda y_true, y_pred: y_pred}) # recompile to apply the change
-        model = tf.contrib.tpu.keras_to_tpu_model(model, , strategy=tf.contrib.tpu.TPUDistributionStrategy(
+        model = tf.contrib.tpu.keras_to_tpu_model(model, strategy=tf.contrib.tpu.TPUDistributionStrategy(
             tf.contrib.cluster_resolver.TPUClusterResolver(TPU_WORKER)))
         print('Unfreeze all of the layers.')
 
