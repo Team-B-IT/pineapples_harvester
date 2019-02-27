@@ -30,9 +30,8 @@ def _main():
 
     is_tiny_version = len(anchors)==6 # default setting
     if is_tiny_version:
-        model = tf.contrib.tpu.keras_to_tpu_model(create_tiny_model(input_shape, anchors, num_classes,
-            freeze_body=2, weights_path='model_data/tiny_yolo_weights.h5'), strategy=tf.contrib.tpu.TPUDistributionStrategy(
-        tf.contrib.cluster_resolver.TPUClusterResolver(TPU_WORKER)))
+        model = create_tiny_model(input_shape, anchors, num_classes,
+            freeze_body=2, weights_path='model_data/tiny_yolo_weights.h5')
     else:
         model = tf.contrib.tpu.keras_to_tpu_model(create_model(input_shape, anchors, num_classes,
             freeze_body=2, weights_path='model_data/yolo_weights.h5'), strategy=tf.contrib.tpu.TPUDistributionStrategy(
@@ -59,6 +58,8 @@ def _main():
         model.compile(optimizer=Adam(lr=1e-3), loss={
             # use custom yolo_loss Lambda layer.
             'yolo_loss': lambda y_true, y_pred: y_pred})
+        model = tf.contrib.tpu.keras_to_tpu_model(model, , strategy=tf.contrib.tpu.TPUDistributionStrategy(
+            tf.contrib.cluster_resolver.TPUClusterResolver(TPU_WORKER)))
 
         batch_size = 32
         print('Train on {} samples, val on {} samples, with batch size {}.'.format(num_train, num_val, batch_size))
@@ -77,6 +78,8 @@ def _main():
         for i in range(len(model.layers)):
             model.layers[i].trainable = True
         model.compile(optimizer=Adam(lr=1e-4), loss={'yolo_loss': lambda y_true, y_pred: y_pred}) # recompile to apply the change
+        model = tf.contrib.tpu.keras_to_tpu_model(model, , strategy=tf.contrib.tpu.TPUDistributionStrategy(
+            tf.contrib.cluster_resolver.TPUClusterResolver(TPU_WORKER)))
         print('Unfreeze all of the layers.')
 
         batch_size = 32 # note that more GPU memory is required after unfreezing the body
