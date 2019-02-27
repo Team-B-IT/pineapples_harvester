@@ -1,0 +1,26 @@
+<annotation>
+	<folder>data03</folder>
+	<filename>20181210_093546.jpg</filename>
+	<path>/home/nc/Downloads/data03/20181210_093546.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>2268</width>
+		<height>4032</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>pineapple</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>121</xmin>
+			<ymin>531</ymin>
+			<xmax>1809</xmax>
+			<ymax>3262</ymax>
+		</bndbox>
+	</object>
+</annotation>

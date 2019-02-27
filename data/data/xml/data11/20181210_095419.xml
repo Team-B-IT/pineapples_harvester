@@ -1,0 +1,26 @@
+<annotation>
+	<folder>data11</folder>
+	<filename>20181210_095419.jpg</filename>
+	<path>/media/trivu/data/DataScience/CV/dua/data11/20181210_095419.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>2268</width>
+		<height>4032</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>pineapple</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1013</xmin>
+			<ymin>1589</ymin>
+			<xmax>1172</xmax>
+			<ymax>2019</ymax>
+		</bndbox>
+	</object>
+</annotation>

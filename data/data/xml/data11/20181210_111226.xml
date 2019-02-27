@@ -1,0 +1,26 @@
+<annotation>
+	<folder>data11_labeled</folder>
+	<filename>20181210_111226.jpg</filename>
+	<path>D:\Downloads\BIT-Dua\data11_labeled\20181210_111226.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4032</width>
+		<height>2268</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>pineapple</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1167</xmin>
+			<ymin>1041</ymin>
+			<xmax>2299</xmax>
+			<ymax>1726</ymax>
+		</bndbox>
+	</object>
+</annotation>

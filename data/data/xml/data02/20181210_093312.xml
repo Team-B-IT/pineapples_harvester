@@ -1,0 +1,26 @@
+<annotation>
+	<folder>data02</folder>
+	<filename>20181210_093312.jpg</filename>
+	<path>/home/cuong/Desktop/BKSEEING/Dua/data02/20181210_093312.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>2268</width>
+		<height>4032</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>pineapple</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>442</xmin>
+			<ymin>603</ymin>
+			<xmax>1642</xmax>
+			<ymax>3357</ymax>
+		</bndbox>
+	</object>
+</annotation>

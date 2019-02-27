@@ -1,0 +1,38 @@
+<annotation>
+	<folder>data08</folder>
+	<filename>20181210_094816.jpg</filename>
+	<path>E:\data pineapple\data\data08\20181210_094816.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>2268</width>
+		<height>4032</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>pineapple</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1202</xmin>
+			<ymin>2995</ymin>
+			<xmax>1848</xmax>
+			<ymax>3987</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>pineapple</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>260</xmin>
+			<ymin>432</ymin>
+			<xmax>1235</xmax>
+			<ymax>1783</ymax>
+		</bndbox>
+	</object>
+</annotation>

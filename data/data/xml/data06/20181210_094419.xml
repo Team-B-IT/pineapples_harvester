@@ -1,0 +1,26 @@
+<annotation>
+	<folder>data06</folder>
+	<filename>20181210_094419.jpg</filename>
+	<path>C:\Users\Hoang\Downloads\data06\data06\20181210_094419.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4032</width>
+		<height>2268</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>pineaple</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1276</xmin>
+			<ymin>279</ymin>
+			<xmax>2368</xmax>
+			<ymax>1712</ymax>
+		</bndbox>
+	</object>
+</annotation>

@@ -1,0 +1,28 @@
+Hướng dẫn sử dụng:
+1. Tải tool và cài đặt
+Có 2 cách tải tool và cài đặt:
+	- Cách 1: Tải mã nguồn và tự compile: https://github.com/tzutalin/labelImg
+	- Cách 2: Tải trực tiếp file thực thi trong folder labelimg (phiên bản 1.8.0 cho Windows), nếu muốn tải các phiên bản khác thì có thể vào đây: https://tzutalin.github.io/labelImg/
+
+2. Gán nhãn dữ liệu
+	a. Phân công công việc
+		- Mở file pccv.txt để xem phân công công việc cho từng người
+		- Tải thư mục ảnh được phân công trong thư mục data và thực hiện gán nhãn
+	b. Cách sử dụng tool
+		- Mở tool
+		- Click vào Open Dir và chọn thư mục chứa dữ liệu
+		- Thay đổi thư mục lưu Annotation: Vào File -> Change Save Dir rồi chọn thư mục chứa annotation
+		- Có thể vào View, bật Auto Saving và Single Class Model để việc gán nhãn thuận tiện hơn.
+		- Sau khi đã thiết lập xong thì bắt đầu gán nhãn:
+			+ Ấn W để vẽ 1 box và chọn class, có thể chỉnh sửa box bằng cách kéo thả các góc.
+			+ Xoá box bằng cách chọn box và ấn Delete.
+			+ Yêu cầu: Mỗi quả dứa tương ứng với 1 box. Các box phải bao trọn và ôm sát viền quả dứa + phần vương miện + 1 phần cuống. Nếu quả dứa bị che mất một phần thì có thể tự ước lượng phần bị che và vẽ box đến vị trí đó. Tham khảo ví dụ trong thư mục data13.
+		- Sau khi gán nhãn xong thì upload toàn bộ file annotation (.xml) được sinh ra vào thư mục ảnh tương ứng.
+
+3. Kiểm tra dữ liệu
+- Mỗi người sẽ tự kiểm tra lại dữ liệu đã gán nhãn để đảm bảo không có sai sót.
+- Kiểm tra chéo: Người đánh nhãn thư mục data00 kiểm tra dữ liệu data01, data01 kiểm tra data02,... data12 kiểm tra data00.
+
+4. Deadline
+- Deadline gán nhãn là 20h ngày 19/2/2019.
+- Deadline kiểm tra là 23h59 ngày 19/2/2019.
