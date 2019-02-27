@@ -58,7 +58,7 @@ class YOLO_Kmeans:
         return clusters
 
     def result2txt(self, data):
-        f = open("pineapple_anchors.txt", 'w')
+        f = open("model_data/pineapple_anchors.txt", 'w')
         row = np.shape(data)[0]
         for i in range(row):
             if i == 0:
