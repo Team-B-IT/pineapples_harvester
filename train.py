@@ -33,9 +33,8 @@ def _main():
         model = create_tiny_model(input_shape, anchors, num_classes,
             freeze_body=2, weights_path='model_data/tiny_yolo_weights.h5')
     else:
-        model = tf.contrib.tpu.keras_to_tpu_model(create_model(input_shape, anchors, num_classes,
-            freeze_body=2, weights_path='model_data/yolo_weights.h5'), strategy=tf.contrib.tpu.TPUDistributionStrategy(
-        tf.contrib.cluster_resolver.TPUClusterResolver(TPU_WORKER))) # make sure you know what you freeze
+        model = create_model(input_shape, anchors, num_classes,
+            freeze_body=2, weights_path='model_data/yolo_weights.h5') # make sure you know what you freeze
 
     logging = TensorBoard(log_dir=log_dir)
     checkpoint = ModelCheckpoint(log_dir + 'ep{epoch:03d}-loss{loss:.3f}-val_loss{val_loss:.3f}.h5',
