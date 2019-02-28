@@ -30,6 +30,8 @@ def convert_annotation(img_link, xml_link, list_file):
         w = int(obj.find('width').text)
         h = int(obj.find('height').text)
 
+    scale = 416 / max(w, h)
+
     list_file.write(img_link)
 
     for obj in root.iter('object'):
@@ -57,7 +59,8 @@ def convert_annotation(img_link, xml_link, list_file):
             temp = b[1]
             b[1] = b[3]
             b[3] = temp
-        list_file.write(" " + ",".join([str(a) for a in b]) + ',' + str(cls_id))
+
+        list_file.write(" " + ",".join([str(int(a * scale)) for a in b]) + ',' + str(cls_id))
         if cls_id == 0:
             a = a + 1
 
