@@ -8,8 +8,11 @@ with open("./model_data/pineapple_classes.txt") as f:
     classes = list(line.replace('\n', '') for line in f)
 print (classes)
 
+a = 0
+
 
 def convert_annotation(img_link, xml_link, list_file):
+    global a
     try:
         Image.open(img_link)
         in_file = open(xml_link)
@@ -33,7 +36,8 @@ def convert_annotation(img_link, xml_link, list_file):
         difficult = obj.find('difficult').text
         cls = obj.find('name').text
         if cls not in classes or int(difficult)==1:
-            continue
+            cls = 'pineapple'
+            #continue
         cls_id = classes.index(cls)
         xmlbox = obj.find('bndbox')
         b = list((int(xmlbox.find('xmin').text), int(xmlbox.find('ymin').text), int(xmlbox.find('xmax').text), int(xmlbox.find('ymax').text)))
@@ -54,6 +58,8 @@ def convert_annotation(img_link, xml_link, list_file):
             b[1] = b[3]
             b[3] = temp
         list_file.write(" " + ",".join([str(a) for a in b]) + ',' + str(cls_id))
+        if cls_id == 0:
+            a = a + 1
 
     list_file.write("\n")
 
@@ -69,7 +75,8 @@ for i in range(11):
             continue
         img_link = jpg_folder + "/" + file
         xml_link = xml_folder + "/" + file[:-4] + ".xml"
-        print(img_link, xml_link)
+        # print(img_link, xml_link)
         convert_annotation(img_link, xml_link, list_file)
 
+print(a)
 list_file.close()

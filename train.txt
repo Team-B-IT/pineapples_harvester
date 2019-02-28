@@ -459,83 +459,83 @@
 ./data/data/jpg/data05/20181210_094157.jpg 519,836,1696,2936,0
 ./data/data/jpg/data05/20181210_094205.jpg 13,7,2113,3595,0
 ./data/data/jpg/data05/20181210_094206.jpg 7,7,2007,3342,0
-./data/data/jpg/data06/20181210_094207.jpg
-./data/data/jpg/data06/20181210_094208.jpg
-./data/data/jpg/data06/20181210_094209.jpg
-./data/data/jpg/data06/20181210_094214.jpg
-./data/data/jpg/data06/20181210_094215.jpg
-./data/data/jpg/data06/20181210_094216(0).jpg
-./data/data/jpg/data06/20181210_094216.jpg
-./data/data/jpg/data06/20181210_094223.jpg
-./data/data/jpg/data06/20181210_094224.jpg
-./data/data/jpg/data06/20181210_094225.jpg
-./data/data/jpg/data06/20181210_094226.jpg
-./data/data/jpg/data06/20181210_094227.jpg
-./data/data/jpg/data06/20181210_094232.jpg
-./data/data/jpg/data06/20181210_094233(0).jpg
-./data/data/jpg/data06/20181210_094233.jpg
-./data/data/jpg/data06/20181210_094237.jpg
-./data/data/jpg/data06/20181210_094238.jpg
-./data/data/jpg/data06/20181210_094239.jpg
-./data/data/jpg/data06/20181210_094240.jpg
-./data/data/jpg/data06/20181210_094241.jpg
-./data/data/jpg/data06/20181210_094245.jpg
-./data/data/jpg/data06/20181210_094246.jpg
-./data/data/jpg/data06/20181210_094250.jpg
-./data/data/jpg/data06/20181210_094251.jpg
-./data/data/jpg/data06/20181210_094252.jpg
-./data/data/jpg/data06/20181210_094253.jpg
-./data/data/jpg/data06/20181210_094258.jpg
-./data/data/jpg/data06/20181210_094300.jpg
-./data/data/jpg/data06/20181210_094301.jpg
-./data/data/jpg/data06/20181210_094303.jpg
-./data/data/jpg/data06/20181210_094308(0).jpg
-./data/data/jpg/data06/20181210_094308.jpg
-./data/data/jpg/data06/20181210_094310.jpg
-./data/data/jpg/data06/20181210_094314.jpg
-./data/data/jpg/data06/20181210_094315.jpg
-./data/data/jpg/data06/20181210_094324.jpg
-./data/data/jpg/data06/20181210_094325.jpg
-./data/data/jpg/data06/20181210_094326.jpg
-./data/data/jpg/data06/20181210_094328.jpg
-./data/data/jpg/data06/20181210_094329.jpg
-./data/data/jpg/data06/20181210_094330.jpg
-./data/data/jpg/data06/20181210_094331.jpg
-./data/data/jpg/data06/20181210_094332.jpg
-./data/data/jpg/data06/20181210_094337(0).jpg
-./data/data/jpg/data06/20181210_094337.jpg
-./data/data/jpg/data06/20181210_094338.jpg
-./data/data/jpg/data06/20181210_094341.jpg
-./data/data/jpg/data06/20181210_094342.jpg
-./data/data/jpg/data06/20181210_094346.jpg
-./data/data/jpg/data06/20181210_094352.jpg
-./data/data/jpg/data06/20181210_094353.jpg
-./data/data/jpg/data06/20181210_094354.jpg
-./data/data/jpg/data06/20181210_094404.jpg
-./data/data/jpg/data06/20181210_094406.jpg
-./data/data/jpg/data06/20181210_094413.jpg
-./data/data/jpg/data06/20181210_094414.jpg
-./data/data/jpg/data06/20181210_094415.jpg
-./data/data/jpg/data06/20181210_094418.jpg
-./data/data/jpg/data06/20181210_094419.jpg
-./data/data/jpg/data06/20181210_094422.jpg
-./data/data/jpg/data06/20181210_094423.jpg
-./data/data/jpg/data06/20181210_094424(0).jpg
-./data/data/jpg/data06/20181210_094424.jpg
-./data/data/jpg/data06/20181210_094426.jpg
-./data/data/jpg/data06/20181210_094427.jpg
-./data/data/jpg/data06/20181210_094428(0).jpg
-./data/data/jpg/data06/20181210_094428.jpg
-./data/data/jpg/data06/20181210_094429.jpg
-./data/data/jpg/data06/20181210_094431.jpg
-./data/data/jpg/data06/20181210_094432.jpg
-./data/data/jpg/data06/20181210_094434(0).jpg
-./data/data/jpg/data06/20181210_094434.jpg
-./data/data/jpg/data06/20181210_094435.jpg
-./data/data/jpg/data06/20181210_094436.jpg
-./data/data/jpg/data06/20181210_094437(0).jpg
-./data/data/jpg/data06/20181210_094437.jpg
-./data/data/jpg/data06/20181210_094438.jpg
+./data/data/jpg/data06/20181210_094207.jpg 68,41,2112,3322,0
+./data/data/jpg/data06/20181210_094208.jpg 81,222,2068,3347,0
+./data/data/jpg/data06/20181210_094209.jpg 6,35,2100,3160,0
+./data/data/jpg/data06/20181210_094214.jpg 281,1635,1606,3322,0
+./data/data/jpg/data06/20181210_094215.jpg 143,1447,1443,3178,0
+./data/data/jpg/data06/20181210_094216(0).jpg 487,1272,1775,3041,0
+./data/data/jpg/data06/20181210_094216.jpg 450,1303,1818,3010,0
+./data/data/jpg/data06/20181210_094223.jpg 337,1591,1675,3572,0
+./data/data/jpg/data06/20181210_094224.jpg 356,1591,1681,3572,0
+./data/data/jpg/data06/20181210_094225.jpg 325,1547,1756,3535,0
+./data/data/jpg/data06/20181210_094226.jpg 12,1016,1518,3441,0
+./data/data/jpg/data06/20181210_094227.jpg 56,903,1612,3572,0
+./data/data/jpg/data06/20181210_094232.jpg 412,1603,1343,2716,0
+./data/data/jpg/data06/20181210_094233(0).jpg 450,1666,1231,2710,0
+./data/data/jpg/data06/20181210_094233.jpg 500,1760,1250,2728,0
+./data/data/jpg/data06/20181210_094237.jpg 325,1022,1243,2828,0
+./data/data/jpg/data06/20181210_094238.jpg 262,1035,1143,2747,0
+./data/data/jpg/data06/20181210_094239.jpg 281,1110,1168,2810,0
+./data/data/jpg/data06/20181210_094240.jpg 662,1072,1743,2910,0
+./data/data/jpg/data06/20181210_094241.jpg 612,1035,1668,2828,0
+./data/data/jpg/data06/20181210_094245.jpg 706,2585,1456,3403,0 1362,635,1931,1378,0
+./data/data/jpg/data06/20181210_094246.jpg 1393,597,1837,1235,0 750,2585,1375,3272,0
+./data/data/jpg/data06/20181210_094250.jpg 1100,1047,1993,2685,0
+./data/data/jpg/data06/20181210_094251.jpg 1031,1197,2018,2722,0
+./data/data/jpg/data06/20181210_094252.jpg 1200,1185,2081,2703,0
+./data/data/jpg/data06/20181210_094253.jpg 1450,1172,2218,2853,0
+./data/data/jpg/data06/20181210_094258.jpg 706,3041,1468,3828,0
+./data/data/jpg/data06/20181210_094300.jpg 1181,2516,1775,3416,0
+./data/data/jpg/data06/20181210_094301.jpg 1068,2541,1750,3378,0
+./data/data/jpg/data06/20181210_094303.jpg 500,3235,1431,3972,0
+./data/data/jpg/data06/20181210_094308(0).jpg 268,1247,1312,2878,0
+./data/data/jpg/data06/20181210_094308.jpg 381,1172,1393,2991,0
+./data/data/jpg/data06/20181210_094310.jpg 568,1653,1162,2341,0
+./data/data/jpg/data06/20181210_094314.jpg 43,1166,1500,2891,0
+./data/data/jpg/data06/20181210_094315.jpg 25,922,1506,2810,0
+./data/data/jpg/data06/20181210_094324.jpg 381,616,1637,2553,0
+./data/data/jpg/data06/20181210_094325.jpg 500,697,1637,2535,0
+./data/data/jpg/data06/20181210_094326.jpg 337,785,1618,2610,0
+./data/data/jpg/data06/20181210_094328.jpg 250,1016,1593,3328,0
+./data/data/jpg/data06/20181210_094329.jpg 225,866,1637,3266,0
+./data/data/jpg/data06/20181210_094330.jpg 262,803,1587,3316,0
+./data/data/jpg/data06/20181210_094331.jpg 368,810,1950,3322,0
+./data/data/jpg/data06/20181210_094332.jpg 468,766,2000,3203,0
+./data/data/jpg/data06/20181210_094337(0).jpg 325,722,1175,2278,0
+./data/data/jpg/data06/20181210_094337.jpg 425,691,1275,2285,0
+./data/data/jpg/data06/20181210_094338.jpg 412,960,1206,2472,0
+./data/data/jpg/data06/20181210_094341.jpg 875,1560,1912,3041,0
+./data/data/jpg/data06/20181210_094342.jpg 793,1422,1987,3066,0
+./data/data/jpg/data06/20181210_094346.jpg 162,1235,1025,2485,0 1137,1285,2062,3235,0
+./data/data/jpg/data06/20181210_094352.jpg 685,600,1906,1912,0 2189,212,3543,1921,0
+./data/data/jpg/data06/20181210_094353.jpg 664,612,1956,1921,0 2243,150,3585,2012,0
+./data/data/jpg/data06/20181210_094354.jpg 626,571,1856,1987,0 2210,46,3535,2046,0
+./data/data/jpg/data06/20181210_094404.jpg 672,671,1339,1754,0 2347,433,2943,1408,0
+./data/data/jpg/data06/20181210_094406.jpg 726,612,1393,1704,0 2368,367,2964,1379,0
+./data/data/jpg/data06/20181210_094413.jpg 612,1860,1256,2641,0
+./data/data/jpg/data06/20181210_094414.jpg 668,1941,1318,2747,0 1168,378,1656,991,0
+./data/data/jpg/data06/20181210_094415.jpg 537,2153,1237,3010,0 1087,560,1562,1241,0
+./data/data/jpg/data06/20181210_094418.jpg 1393,304,2285,1662,0
+./data/data/jpg/data06/20181210_094419.jpg 1276,279,2368,1712,0
+./data/data/jpg/data06/20181210_094422.jpg 337,766,1362,2735,0
+./data/data/jpg/data06/20181210_094423.jpg 562,1072,1643,2828,0
+./data/data/jpg/data06/20181210_094424(0).jpg 356,1228,1531,2953,0
+./data/data/jpg/data06/20181210_094424.jpg 450,1260,1500,2935,0
+./data/data/jpg/data06/20181210_094426.jpg 350,1322,1512,3078,0
+./data/data/jpg/data06/20181210_094427.jpg 400,1335,1537,3160,0
+./data/data/jpg/data06/20181210_094428(0).jpg 625,1360,1950,3228,0
+./data/data/jpg/data06/20181210_094428.jpg 431,1241,1656,3203,0
+./data/data/jpg/data06/20181210_094429.jpg 275,1441,1218,3103,0
+./data/data/jpg/data06/20181210_094431.jpg 456,1372,1287,3003,0
+./data/data/jpg/data06/20181210_094432.jpg 418,1503,1268,3035,0
+./data/data/jpg/data06/20181210_094434(0).jpg 281,1535,1212,3247,0
+./data/data/jpg/data06/20181210_094434.jpg 843,1516,1762,3285,0
+./data/data/jpg/data06/20181210_094435.jpg 425,1622,1356,3272,0
+./data/data/jpg/data06/20181210_094436.jpg 468,1266,1418,2935,0
+./data/data/jpg/data06/20181210_094437(0).jpg 506,1278,1468,2966,0
+./data/data/jpg/data06/20181210_094437.jpg 450,1197,1381,2835,0
+./data/data/jpg/data06/20181210_094438.jpg 481,1022,1568,2910,0
 ./data/data/jpg/data07/20181210_094439.jpg 731,869,2114,3133,0
 ./data/data/jpg/data07/20181210_094441.jpg 425,1163,1501,3269,0 7,345,254,904,0
 ./data/data/jpg/data07/20181210_094442.jpg 484,1257,1537,3363,0 13,427,284,969,0
