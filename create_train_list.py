@@ -30,7 +30,8 @@ def convert_annotation(img_link, xml_link, list_file):
         w = int(obj.find('width').text)
         h = int(obj.find('height').text)
 
-    scale = 416 / max(w, h)
+    # scale = 416 / max(w, h)
+    scale = 1
 
     list_file.write(img_link)
 

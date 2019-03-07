@@ -15,7 +15,7 @@ from PIL import ImageFile
 
 def _main():
     annotation_path = 'train.txt'
-    log_dir = 'logs/000/'
+    log_dir = 'logs/000_1/'
     classes_path = 'model_data/pineapple_classes.txt'
     anchors_path = 'model_data/pineapple_anchors.txt'
     class_names = get_classes(classes_path)
