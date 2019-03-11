@@ -15,7 +15,7 @@ from PIL import ImageFile
 
 def _main():
     annotation_path = 'train.txt'
-    log_dir = 'logs/000_2/'
+    log_dir = 'logs/000_3/'
     classes_path = 'model_data/pineapple_classes.txt'
     anchors_path = 'model_data/pineapple_anchors.txt'
     class_names = get_classes(classes_path)
@@ -61,9 +61,9 @@ def _main():
                 validation_data=data_generator_wrapper(lines[num_train:], batch_size, input_shape, anchors, num_classes),
                 validation_steps=max(1, num_val//batch_size),
                 epochs=20,
-                initial_epoch=10,
+                initial_epoch=0,
                 callbacks=[logging, checkpoint])
-        model.save_weights(log_dir + 'trained_weights_stage_2.h5')
+        model.save_weights(log_dir + 'trained_weights_stage_1.h5')
 
     # Unfreeze and continue training, to fine-tune.
     # Train longer if the result is not good.
