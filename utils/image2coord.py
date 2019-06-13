@@ -30,7 +30,7 @@ def to_coord(x, y):
 
 	rx, ry = 0, 0
 
-	HF = y/imgh*CD
+	HF = abs(y/imgh*CD)
 	aGAE = atan(HF/AF)
 	aEAO = aGAO + aGAE if y >= 0 else aGAO - aGAE
 	EO = tan(aEAO)*AO
