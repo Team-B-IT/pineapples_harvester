@@ -5,9 +5,9 @@ imgh = 1080
 
 a = radians(42.5) # camera vertical view angle +/-3
 b = radians(69.4) # camera horizontal view angle +/-3
-aGAO = radians(39) # camera optical angle (to z-axis)
+aGAO = radians(90-49) # camera optical angle (to x-axis)
 
-AO = 80 # distance from camera to ground
+AO = 105 # distance from camera to ground
 CO = tan(aGAO - a/2)*AO
 
 AC = sqrt(AO*AO + CO*CO)
@@ -17,12 +17,12 @@ AG = AO/cos(aGAO) # optical line
 
 # trapezium to triangle angle
 
-GO = tan(aGAO)*AO
-RO = AO/tan(aGAO)
+GO = tan(aGAO)*AO # projection of AG on ground
+RO = AO/tan(aGAO) 
 
-PQ = 2*tan(b/2)*AF # PQ get through F
+PQ = 2*tan(b/2)*AF # real world scaled width, PQ across F
 
-CD = 2*sin(a/2)*AC
+CD = 2*sin(a/2)*AC # real world scaled height
 
 def to_coord(x, y):
 	x = x - imgw/2
@@ -30,14 +30,16 @@ def to_coord(x, y):
 
 	rx, ry = 0, 0
 
-	HF = abs(y/imgh*CD)
+	HF = abs(y/imgh*CD) # real-scaled-height on image from (x, y) point to optical point
 	aGAE = atan(HF/AF)
 	aEAO = aGAO + aGAE if y >= 0 else aGAO - aGAE
 	EO = tan(aEAO)*AO
 	ry = EO
 
-	imX = x/imgw*(AG*PQ/AF)
+	imX = x/imgw*(AG*PQ/AF) 
 	rx = imX*(EO + RO)/(GO + RO)
+	rx = int(rx)
+	ry = int(ry)
 	print ('Camera POV:', rx, ry)
 	return rx, ry
 
