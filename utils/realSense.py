@@ -16,6 +16,8 @@ class realSenseStream():
         self.pv_height = h
         self.size_config(self.pv_width, self.pv_height)
         self.profile = self.pipeline.start(self.config)
+        self.pipeline.wait_for_frames()
+        time.sleep(3)
 
     def size_config(self, w, h):
         self.config.enable_stream(rs.stream.color, w, h, rs.format.bgr8, 30)
@@ -34,6 +36,7 @@ class realSenseStream():
             cv2.imwrite(imgName, color_image)
             cv2.waitKey(30)
             return imgName, color_image
+
     def get_frame(self):
         while True:
             frames = self.pipeline.wait_for_frames()
@@ -48,19 +51,13 @@ class realSenseStream():
             img1=cv2.resize(img,dsize=(0,0),fx=0.3,fy=0.4,interpolation = cv2.INTER_AREA)
         
             # x = np.array(image)
-            # cv2.
-            
-           
             # imgName = self.path + str(int(time.time()*1000.0)) + '.jpeg'
             # cv2.imwrite(imgName, color_image) #lưu ảnh kiểu mảng numpy vào 1 file mới tên là imgName
             # cv2.waitKey(30)
             return img1
 
-            
-
     def __del__(self):
         self.pipeline.stop()
-
 
 if __name__ == '__main__':
     rss = realSenseStream('img')

@@ -26,27 +26,24 @@ hand_queue = queue.Queue(0)
 boxList1 = []
 boxList2 = []
 
-#PLC1
+# PLC1
 plc1 = PLC_IO("PLC 1", '/dev/ttyUSB0')
 plcThread1 = PLCASync(plc1)
 plcThread1.start()
 
- # PLC2
+# PLC2
 plc2 = PLC_IO("PLC 2", '/dev/ttyUSB1')
 plcThread2 = PLCASync(plc2)
 plcThread2.start()
 
-
-path, _ = take_image()
-sleep(10)
 print("Camera started.")
 #B1: Nhận takephoto từ PLC1
 #B2: Camera chụp ảnh và detect
-#B3: Chuyển sâng tọa độ cam và gửi ên PLC
+#B3: Chuyển sâng tọa độ cam và gửi lên PLC
 #B4: Quay lại vòng lặp
 
 while True:
-	print("wait")
+	print("Wait")
 	print(plcThread1.take)
 	while plcThread1.take == False:	
 		print(plcThread1.take)
@@ -60,14 +57,11 @@ while True:
 	print("Tsh! Detecting...")
 	data = detect(image) # nhan dien dua'
 	print("Detected.")
-
 	count_dua = 0
 	for box in data['objects']:
 		if  box['class'] == 3:
-			
 			count_dua += 1 
 			rx, ry = to_coord(box['box']['x'], box['box']['y']) # chuyen toa do tu anh -> thuc
-
 			draw.rectangle([box['box']['left'], box['box']['top'], box['box']['right'], box['box']['bottom']], outline=(255,0,0), width=10)
 			campov = str(rx)+' '+str(ry)
 			draw.text((box['box']['left'], box['box']['top']-35), campov, fill = (255, 0, 0), font = font)
@@ -99,7 +93,6 @@ while True:
 				plcThread1.ready = False  # reset tay
 			boxList1.pop() # loai bo qua dua da cat
 
-		
 		if (plcThread2.ready == True and len(boxList2) != 0):
 			obj = boxList2[-1]
 			print('Pineapple at:', obj['x'], obj['y'], 'score =', obj['box']['score'])
