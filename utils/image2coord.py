@@ -1,7 +1,7 @@
 from math import sin, cos, tan, atan, sqrt, radians
 
-imgw = 1920
 imgh = 1080
+imgw = 1920
 
 a = radians(42.5) # camera vertical view angle +/-3
 b = radians(69.4) # camera horizontal view angle +/-3
@@ -38,10 +38,32 @@ def to_coord(x, y):
 
 	imX = x/imgw*(AG*PQ/AF) 
 	rx = imX*(EO + RO)/(GO + RO)
-	rx = int(rx)
-	ry = int(ry)
+	#rx = int(rx)
+	#ry = int(ry)
+	print ('Camera POV:', rx, ry)
+	return rx, ry
+
+def to_coord_from_depth(x, y, depth):
+	x = x - imgw/2
+	y = imgh/2 - y
+
+	rx, ry = 0, 0
+
+	# Distance from camera to image in pixel
+	hPixel = (imgw/2/tan(b/2) + imgh/2/tan(a/2)) / 2 # in pixels
+
+	# Depth value in corresponding pixel of image
+	depthPixel = sqrt(x*x + y*y + hPixel*hPixel) # pixels
+
+	rx = depth/depthPixel*x # Real coordinate x
+	ry = depth/depthPixel*sqrt(y*y + hPixel*hPixel)*sin(aGAO + atan(y/hPixel)) # Real coordinate y
+
+	#rx = int(rx)
+	#ry = int(ry)
+
 	print ('Camera POV:', rx, ry)
 	return rx, ry
 
 if __name__ == '__main__':
 	to_coord(300, 300)
+	to_coord_from_depth(300, 300, 241.29857024)
