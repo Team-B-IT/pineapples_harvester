@@ -13,7 +13,7 @@ from PIL import ImageFile
 
 from yolo3.model import preprocess_true_boxes, yolo_body, tiny_yolo_body, yolo_loss
 from yolo3.utils import get_random_data
-from tensorboardcolab import *
+# from tensorboardcolab import *
 
 def _main():
     annotation_path = 'train.txt'
@@ -32,7 +32,7 @@ def _main():
             freeze_body=2, weights_path='model_data/tiny_yolo_weights.h5')
     else:
         model = create_model(input_shape, anchors, num_classes,
-            freeze_body=2, weights_path='logs/002/trained_weights_final.h5') # make sure you know what you freeze
+            freeze_body=2, weights_path='logs/trained_weights_final.h5') # make sure you know what you freeze
 
     logging = TensorBoard(log_dir=log_dir)
     checkpoint = ModelCheckpoint(log_dir + 'ep{epoch:03d}-loss{loss:.3f}-val_loss{val_loss:.3f}.h5',
@@ -50,7 +50,7 @@ def _main():
     num_train = len(lines) - num_val
 
     #TensorBoard
-    tbc=TensorBoardColab()
+    # tbc=TensorBoardColab()
     
     
     # Train with frozen layers first, to get a stable loss.
@@ -68,7 +68,7 @@ def _main():
                 validation_steps=max(1, num_val//batch_size),
                 epochs= 150,
                 initial_epoch=0,
-                callbacks=[logging, checkpoint, TensorBoardColabCallback(tbc)])
+                callbacks=[logging, checkpoint])
         model.save_weights(log_dir + 'trained_weights_stage_1.h5')
     
     # Unfreeze and continue training, to fine-tune.
@@ -79,7 +79,7 @@ def _main():
         model.compile(optimizer=Adam(lr=1e-4), loss={'yolo_loss': lambda y_true, y_pred: y_pred}) # recompile to apply the change
         print('Unfreeze all of the layers.')
 
-        batch_size = 8 # note that more GPU memory is required after unfreezing the body
+        batch_size = 2 # note that more GPU memory is required after unfreezing the body
         print('Train on {} samples, val on {} samples, with batch size {}.'.format(num_train, num_val, batch_size))
         model.fit_generator(data_generator_wrapper(lines[:num_train], batch_size, input_shape, anchors, num_classes),
             steps_per_epoch=max(1, num_train//batch_size),
@@ -87,7 +87,7 @@ def _main():
             validation_steps=max(1, num_val//batch_size),
             epochs= 100,
             initial_epoch= 0,
-            callbacks=[logging, checkpoint, reduce_lr, early_stopping, TensorBoardColabCallback(tbc)])
+            callbacks=[logging, checkpoint, reduce_lr, early_stopping])
         model.save_weights(log_dir + 'trained_weights_final.h5')
     model.save('trained.model')
     # Further training if needed.
