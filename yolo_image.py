@@ -7,8 +7,11 @@ from PIL import Image
 
 
 def detect_img(yolo, input, output):
-
-    for img in os.listdir(input):
+    if (os.path.isdir(input)):
+        files = os.listdir(input)
+    else:
+        files = [input]
+    for img in files:
         if img.endswith('.jpeg'):
             print(img)
             try:
