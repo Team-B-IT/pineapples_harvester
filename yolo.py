@@ -23,7 +23,7 @@ class YOLO(object):
         "model_path": 'trained.h5',
         "anchors_path": 'model_data/yolo_anchors.txt',
         "classes_path": 'model_data/pineapple_classes.txt',
-        "score" : 0.15,
+        "score" : 0.3,
         "iou" : 0.45,
         "model_image_size" : (416, 416),
         "gpu_num" : 1,
@@ -145,7 +145,7 @@ class YOLO(object):
     #img is name of image
     def detect_image(self, image, img): 
         
-        f = open('../new_data/result_samples/'+img[:-5]+'.txt','w')
+        # f = open('../new_data/result_samples/'+img[:-5]+'.txt','w')
 
         if self.model_image_size != (None, None):
             assert self.model_image_size[0]%32 == 0, 'Multiples of 32 required'
@@ -175,7 +175,7 @@ class YOLO(object):
 
         print('Found {} boxes for {}'.format(len(out_boxes), 'img'))
 
-        font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', size=np.floor(3e-2 * image.size[1] + 0.5).astype('int32'))
+        font = ImageFont.truetype(font='font/FiraMono-Medium.otf', size=np.floor(3e-2 * image.size[1] + 0.5).astype('int32'))
         thickness = (image.size[0] + image.size[1]) // 300
 
         for i, c in reversed(list(enumerate(out_classes))):
@@ -194,7 +194,7 @@ class YOLO(object):
             right = min(image.size[0], np.floor(right + 0.5).astype('int32'))
 
             pos = '{} {} {} {}\n'.format(left, top, right, bottom)
-            f.write(label + ' ' + pos)
+            # f.write(label + ' ' + pos)
             print(label, (left, top), (right, bottom))
             if top - label_size[1] >= 0:
                 text_origin = np.array([left, top - label_size[1]])
@@ -211,7 +211,7 @@ class YOLO(object):
                 fill=self.colors[c])
             draw.text(text_origin, label, fill=(0, 0, 0), font=font)
             del draw
-        f.close()
+        # f.close()
         return image
 
     def close_session(self):

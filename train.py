@@ -89,7 +89,7 @@ def _main():
             initial_epoch= 0,
             callbacks=[logging, checkpoint, reduce_lr, early_stopping])
         model.save_weights(log_dir + 'trained_weights_final.h5')
-    model.save('trained.model')
+    #model.save('trained.model')
     # Further training if needed.
 
 
