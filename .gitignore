@@ -4,7 +4,6 @@ model_checkpoints/
 *.png
 *.jpeg
 *.weights
-*.h5
 logs/
 *_test.py
 
