@@ -5,15 +5,15 @@ from yolo import YOLO, detect_video
 from PIL import Image
 
 
-def detect_img(yolo):
-    testData = '../new_data/samples'
-    resultData = '../new_data/result_samples'
+def detect_img(yolo, input, output):
+    #testData = '../new_data/samples'
+    #resultData = '../new_data/result_samples'
 
-    for img in os.listdir(testData):
+    for img in os.listdir(input):
         if img.endswith('.jpeg'):
             print(img)
             try:
-                image = Image.open(os.path.join(testData,img))
+                image = Image.open(os.path.join(input,img))
             except:
                 print()
                 print('Open Error! Try again!')
@@ -21,7 +21,7 @@ def detect_img(yolo):
             else:
                 r_image = yolo.detect_image(image, img)
                 r_image.show()
-                r_image.save(os.path.join(resultData, img))
+                r_image.save(os.path.join(output, img))
     yolo.close_session()
 
 
@@ -85,7 +85,7 @@ if __name__ == '__main__':
         if "input" in FLAGS:
             print(" Ignoring remaining command line arguments: " +
                   FLAGS.input + "," + FLAGS.output)
-        detect_img(YOLO(**vars(FLAGS)))
+        detect_img(YOLO(**vars(FLAGS)),FLAGS.input, FLAGS.output)
     elif "input" in FLAGS:
         detect_video(YOLO(**vars(FLAGS)), FLAGS.input, FLAGS.output)
     else:

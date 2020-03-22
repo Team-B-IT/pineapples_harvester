@@ -47,8 +47,8 @@ class realSenseStream():
             # Convert images to numpy arrays
             # color_image = np.asanyarray(color_frame.get_data())
             x = np.asanyarray(color_frame.get_data())
-            img = cv2.cvtColor(x,cv2.COLOR_BGR2RGB)
-            img1=cv2.resize(img,dsize=(0,0),fx=0.3,fy=0.4,interpolation = cv2.INTER_AREA)
+            img = cv2.cvtColor(x,cv2.COLOR_BGR2RGB) #loi in ra anh
+            img1=cv2.resize(img,dsize=(0,0),fx=0.498,fy=0.7,interpolation = cv2.INTER_AREA)
         
             # x = np.array(image)
             # imgName = self.path + str(int(time.time()*1000.0)) + '.jpeg'

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Class definition of YOLO_v3 style detection model on image and video
+class học dữ liệu 
 """
 
 import colorsys
@@ -20,11 +21,11 @@ from keras.utils import multi_gpu_model
 
 class YOLO(object):
     _defaults = {
-        "model_path": 'trained.h5',
+        "model_path": 'trained_weights_final.h5',
         "anchors_path": 'model_data/yolo_anchors.txt',
         "classes_path": 'model_data/pineapple_classes.txt',
-        "score" : 0.15,
-        "iou" : 0.45,
+        "score" : 0.05,   #0.1 ,ban dau là 0.05
+        "iou" : 0.35,      #0.35 , ban đầu là 0.35
         "model_image_size" : (416, 416),
         "gpu_num" : 1,
     }
@@ -145,7 +146,7 @@ class YOLO(object):
     #img is name of image
     def detect_image(self, image, img): 
         
-        f = open('../new_data/result_samples/'+img[:-5]+'.txt','w')
+        # f = open('../new_data/result_samples/'+img[:-5]+'.txt','w')
 
         if self.model_image_size != (None, None):
             assert self.model_image_size[0]%32 == 0, 'Multiples of 32 required'
@@ -194,7 +195,7 @@ class YOLO(object):
             right = min(image.size[0], np.floor(right + 0.5).astype('int32'))
 
             pos = '{} {} {} {}\n'.format(left, top, right, bottom)
-            f.write(label + ' ' + pos)
+            # f.write(label + ' ' + pos)
             print(label, (left, top), (right, bottom))
             if top - label_size[1] >= 0:
                 text_origin = np.array([left, top - label_size[1]])
@@ -211,7 +212,7 @@ class YOLO(object):
                 fill=self.colors[c])
             draw.text(text_origin, label, fill=(0, 0, 0), font=font)
             del draw
-        f.close()
+        # f.close()
         return image
 
     def close_session(self):
