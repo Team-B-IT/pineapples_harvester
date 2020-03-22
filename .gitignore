@@ -6,6 +6,7 @@ model_checkpoints/
 *.weights
 logs/
 *_test.py
+*.h5
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
