@@ -19,6 +19,8 @@ from yolo3.utils import letterbox_image
 import os
 from keras.utils import multi_gpu_model
 
+detect_classes = {'full ripe pineapple', 'body ripe pineapple'}
+
 class YOLO(object):
     _defaults = {
         "model_path": 'trained_weights_final.h5',
@@ -180,6 +182,8 @@ class YOLO(object):
         thickness = (image.size[0] + image.size[1]) // 300
 
         for i, c in reversed(list(enumerate(out_classes))):
+            if self.class_names[c] not in detect_classes:
+                continue
             predicted_class = self.class_names[c]
             box = out_boxes[i]
             score = out_scores[i]
