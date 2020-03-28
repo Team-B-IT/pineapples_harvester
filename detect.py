@@ -2,7 +2,8 @@ import os
 from PIL import ImageDraw, ImageFont
 
 from utils.DepthTool import DepthTool
-import utils.image2coord as i2c 
+import utils.image2coord as i2c
+from utils import utils
 
 # danh sách các class nhận điện được từ ảnh
 pineappleClasses = open("./model_data/pineapple_classes.txt", 'r').read()
@@ -63,6 +64,32 @@ def boxesToCoordinates(boxList, depthDataFile):
         pineappleCoordinateList.append({ 'real_x': rx, 'real_y': ry, 'real_z': rz })
     return pineappleCoordinateList
 
+# Loại bỏ các box cùng khoanh vào 1 quả dứa
+# NOTE: kỹ thuật xử lý hiện tại chỉ cho phép tránh 2 box của cùng 1 quả dứa đè lên nhau.
+# boxList: danh sách các box đã phân loại
+# return : danh sách các box sau khi đã loại bỏ trùng lặp
+def boxesAntiDuplication(boxList):
+    resultBoxList = []
+    boxCount = len(boxList)
+    for box1 in boxList:
+        duplicated = False
+        for box2 in resultBoxList:
+            boxCollision = utils.rectangleCollision(box1, box2)
+            
+            box1Area = utils.rectangleArea(box1)
+            box2Area = utils.rectangleArea(box2)
+            boxCollisionArea = utils.rectangleArea(boxCollision)
+            # 80% diện tích của box1 nằm trong box2, ta chọn box1 (box1Area < box2Area, box1 là body)
+            if boxCollisionArea / box1Area >= 0.8:
+                resultBoxList.remove(box2)
+                break
+            elif boxCollisionArea / box2Area >= 0.8:
+                duplicated = True
+                break
+        if duplicated == False:
+            resultBoxList.append(box1)
+    return resultBoxList
+
 # Vẽ các box lên ảnh
 # image: ảnh cần vẽ lên 
 # boxList: danh sách các box
@@ -83,3 +110,24 @@ def drawBoxesOnImage(image, boxList, coordList):
         draw.rectangle([box['box']['left'], box['box']['top'], box['box']['right'], box['box']['bottom']], outline=(255,0,0), width=10)
         # viết chữ lên ảnh
         draw.text((box['box']['left'], box['box']['top']-35), campov, fill = (255, 0, 0), font=font)
+
+if __name__ == "__main__":
+    # test anti duplication
+    # trường hợp đơn giản
+    print(boxesAntiDuplication([
+        {'top':0, 'bottom': 10, 'left': 0, 'right': 10},
+        {'top':6, 'bottom': 9, 'left': -1, 'right': 11},
+    ]))
+    # trường hợp không xảy ra: 3 box đè nhau (tuy nhiên vẫn nên xét tới)
+    # nó cho kết quả không mong muốn khi có > 2 box cùng khoanh vào 1 quả dứa
+    print(boxesAntiDuplication([
+        {'top':2, 'bottom': 8, 'left': 2, 'right': 8},
+        {'top':0, 'bottom': 10, 'left': 0, 'right': 10},
+        {'top':6, 'bottom': 9, 'left': -1, 'right': 11},
+    ]))
+    # trường hợp có thể xảy ra: quả dứa A có box body lọt vào box full của quả dứa B, song, quả dứa B cũng hiện box body
+    print(boxesAntiDuplication([
+        {'top':1, 'bottom': 6, 'left': 2, 'right': 8},
+        {'top':0, 'bottom': 10, 'left': 0, 'right': 10},
+        {'top':6, 'bottom': 9, 'left': -1, 'right': 11},
+    ]))

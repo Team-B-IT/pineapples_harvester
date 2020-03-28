@@ -60,6 +60,9 @@ class HardwareControlThread(Thread):
             # phân loại dứa theo mode
             boxList = classifyPineappleByMode(boxList, self.plcThread1.mode)
             
+            # loại bỏ các box trùng lặp
+            boxList = boxesAntiDuplication(boxList)
+
             # lấy tọa độ của cac box
             coordList = boxesToCoordinates(boxList, imageInfo['depthDataPath'])
             
