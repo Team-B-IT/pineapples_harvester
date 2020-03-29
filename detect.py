@@ -74,10 +74,10 @@ def boxesAntiDuplication(boxList):
     for box1 in boxList:
         duplicated = False
         for box2 in resultBoxList:
-            boxCollision = utils.rectangleCollision(box1, box2)
-            
-            box1Area = utils.rectangleArea(box1)
-            box2Area = utils.rectangleArea(box2)
+            boxCollision = utils.rectangleCollision(box1['box'], box2['box'])
+
+            box1Area = utils.rectangleArea(box1['box'])
+            box2Area = utils.rectangleArea(box2['box'])
             boxCollisionArea = utils.rectangleArea(boxCollision)
             # 80% diện tích của box1 nằm trong box2, ta chọn box1 (box1Area < box2Area, box1 là body)
             if boxCollisionArea / box1Area >= 0.8:
@@ -91,7 +91,7 @@ def boxesAntiDuplication(boxList):
     return resultBoxList
 
 # Vẽ các box lên ảnh
-# image: ảnh cần vẽ lên 
+# image: ảnh cần vẽ lên
 # boxList: danh sách các box
 # coordList: danh sách các tọa độ tương ứng với các box
 # return pineappleCoordinateList: danh sách các tọa độ tương ứng
@@ -104,7 +104,7 @@ def drawBoxesOnImage(image, boxList, coordList):
         box = boxList[i]
         # tọa độ tướng ứng thứ i
         coord = coordList[i]
-        # tọa độ chuyển sang string để vẽ lên ảnh 
+        # tọa độ chuyển sang string để vẽ lên ảnh
         campov = "{0} {1} {2} {3} {4:.3f}".format(coord['real_x'], coord['real_y'], coord['real_z'], box['class'], box['score'])
         # vẽ lên ảnh
         draw.rectangle([box['box']['left'], box['box']['top'], box['box']['right'], box['box']['bottom']], outline=(255,0,0), width=10)

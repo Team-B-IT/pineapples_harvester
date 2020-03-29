@@ -22,7 +22,7 @@ class PLCASync(Thread):
 		super().__init__()
 		self.ser = PLC_IO(name, serialPort) # bộ giao tiếp serial
 		self.state = State.RESET # trạng thái ban đầu
-		self.mode = None # mode cắt 
+		self.mode = None # mode cắt
 		self.boxList = [] # số box còn lại cần phải cắt
 		self.validator = None
 		self.buffer = ''
@@ -68,23 +68,23 @@ class PLCASync(Thread):
 			self.state = State.WAITING
 			self.boxList.pop() # loại bỏ box đã cắt
 			print(self.ser.name, ": Cắt xong.")
-	
+
 	# chờ box để cắt
 	def plcWait(self):
 		if len(self.boxList) != 0:
 			# xét box cuối cùng trong boxList
 			box = self.boxList[-1]
 			print('Pineapple at:', box['real_x'], box['real_y'], box['real_z'])# ghi chú đã bỏ hiển thị score, 'score =', obj['box']['score'])
-			
+
 			# chuyển tọa độ sang dạng để truyền tới PLC
-			packetBox = self.validator(box['real_x'], box['real_y'], box['real_z']) 
-		
+			packetBox = self.validator(box['real_x'], box['real_y'], box['real_z'])
+
 			if packetBox is None:
 			# tọa độ này không cho phép cắt
 				self.boxList.pop()
-				return	
+				return
 			# cho phép cắt
-			self.ser.serialOut(packetBox['x'], packetBox['y'], packetBox['z']) 
+			self.ser.serialOut(packetBox['x'], packetBox['y'], packetBox['z'])
 			self.state = State.CUTTING
 			print(self.ser.name, ": Đang cắt.")
 
@@ -99,15 +99,14 @@ class PLC1(PLCASync):
 	def plcReset(self):
 		if self.buffer == 397: #RESET
 			super(PLC1, self).plcReset()
-			print(self.ser.name, ": Reset.")
 
 	# lệnh chụp ảnh
 	def plcStart(self):
 		self.mode = None
-		if self.buffer == 768: #TAKEPHOTOG
+		if self.buffer == 81: #TAKEPHOTOG
 			self.mode = 3
 			print('Cắt: XANH, CHÍN')
-		if self.buffer == 779: #TAKEPHOTOR
+		if self.buffer == 92: #TAKEPHOTOR
 			self.mode = 2
 			print('Cắt: CHÍN')
 		if self.mode != None:
@@ -147,7 +146,7 @@ class PLC1(PLCASync):
 			return {'x': x, 'y': y, 'z': z}
 		# Không nằm trong tầm cắt thì không trả về gì
 		print(self.ser.name, ": Ngoài khoảng cắt.")
-		return None 
+		return None
 
 class PLC2(PLCASync):
 	def __init__(self, name, serialPort):
