@@ -22,7 +22,7 @@ def rectangleCollision(rect1, rect2):
     # Kiểm tra xem phần trùng có hợp lệ hay không
     if resultRect['top'] > resultRect['bottom'] or resultRect['left'] > resultRect['right']:
         return nonCollisionRect
-    else: 
+    else:
         return resultRect
 
 # Tính diễn tích hình chữ nhật

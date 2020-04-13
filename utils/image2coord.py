@@ -21,7 +21,7 @@ aGAO = radians(90-angleToHorizon) # camera optical angle (to x-axis)  # goc cua 
 # # trapezium to triangle angle
 
 # GO = tan(aGAO)*AO # projection of AG on ground
-# RO = AO/tan(aGAO) 
+# RO = AO/tan(aGAO)
 
 # PQ = 2*tan(b/2)*AF # real world scaled width, PQ across F
 
@@ -39,7 +39,7 @@ aGAO = radians(90-angleToHorizon) # camera optical angle (to x-axis)  # goc cua 
 # 	EO = tan(aEAO)*AO
 # 	ry = EO
 
-# 	imX = x/imgw*(AG*PQ/AF) 
+# 	imX = x/imgw*(AG*PQ/AF)
 # 	rx = imX*(EO + RO)/(GO + RO)
 # 	#rx = int(rx)
 # 	#ry = int(ry)

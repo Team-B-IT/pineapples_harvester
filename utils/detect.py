@@ -4,18 +4,7 @@ from PIL import ImageDraw, ImageFont
 from utils.DepthTool import DepthTool
 import utils.image2coord as i2c
 from utils import utils
-
-# danh sách các class nhận điện được từ ảnh
-pineappleClasses = open("./model_data/pineapple_classes.txt", 'r').read()
-pineappleClasses = pineappleClasses.split('\n')
-
-# danh sách các class phân chia theo mode
-modeClasses = {
-    0: {'full baby pineapple', 'body baby pineapple'},
-    1: {'full green pineapple', 'body green pineapple'},
-    2: {'full ripe pineapple', 'body ripe pineapple'},
-    3: {'full green pineapple', 'body green pineapple', 'full ripe pineapple', 'body ripe pineapple'}
-}
+from config.config import *
 
 # Nhận diện dứa
 # image: ảnh lấy từ camera
@@ -26,12 +15,11 @@ modeClasses = {
 
 # Phân loại dứa theo mode
 # boxList: tập các box nhận diện được
-# mode: mode được chọn
 # return classifiedBoxList: tập các box đã lọc
-def classifyPineappleByMode(boxList, mode):
+def classifyPineappleByMode(boxList):
     print("Classify pineapples")
     countPineapple = 0 # Đếm số dứa sẽ cắt
-    selectClasses = modeClasses[mode]
+    selectClasses = modeClasses[modeConfigured]
     # print(pineappleClasses)
     classifiedBoxList = []
     for box in boxList['objects']:
@@ -76,7 +64,6 @@ def boxesToCoordinates(boxList, depthDataFile):
 # return : danh sách các box sau khi đã loại bỏ trùng lặp
 def boxesAntiDuplication(boxList):
     resultBoxList = []
-    boxCount = len(boxList)
     for box1 in boxList:
         duplicated = False
         for box2 in resultBoxList:

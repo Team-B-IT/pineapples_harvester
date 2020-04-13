@@ -1,11 +1,11 @@
 import utils.image2coord as i2c
 
- 
+
 class DepthTool():
     def readCord(self, file):
         self.cord = [[]]
         f = open(file, "r")
-        
+
         id = 0 #index of current row
 
         for line in f:
@@ -52,7 +52,7 @@ class DepthTool():
             self.gridY.append(y)
         for x in range(xLT, xRD, stepX):
             self.gridX.append(x)
-        
+
         self.dimY = len(self.gridY)
         self.dimX = len(self.gridX)
         depth = self.getDepthUsingVoteMap(bias)
@@ -88,7 +88,7 @@ class DepthTool():
                         # print ("({0}, {1}) ({2}, {3})".format(x, y, x2, y2))
                         if abs(self.cord[y][x] - self.cord[y2][x2]) < bias:
                             voteMap[thisY][thisX] += 1
-    
+
         # print(voteMap)
         FposX = 0
         FposY = 0
