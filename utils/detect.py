@@ -52,9 +52,9 @@ def boxesToCoordinates(boxList, depthDataFile):
         pineappleCoordinateList.append({ 'real_x': rx, 'real_y': ry, 'real_z': rz })
 
         # log
-        print('Depth: ', depth)
-        print ('Camera POV (X,Y,Z):', rx, ry, rz)
-        print('Score: ', box['score'])
+        # print('Depth: ', depth)
+        # print ('Camera POV (X,Y,Z):', rx, ry, rz)
+        # print('Score: ', box['score'])
 
     return pineappleCoordinateList
 

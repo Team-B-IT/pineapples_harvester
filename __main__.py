@@ -44,8 +44,9 @@ class HardwareControlThread(Thread):
 
         # self._stop_flag = False
         while True:
+            sleep(0.002)
             # khi 2 tay hết việc
-            if self.plc1.state is PlcState.DONE and self.plc2.state is PlcState.DONE:
+            if self.plc1.state is PlcState.NOJOBS and self.plc2.state is PlcState.NOJOBS:
                 path, dataPath, _ = rs.take_image() # chup anh
                 print('Chụp ảnh xong.')
                 image = Image.open(path)
@@ -69,6 +70,8 @@ class HardwareControlThread(Thread):
                 list2.sort(key=operator.itemgetter('real_x'))
                 self.plc1.queue.new(list1)
                 self.plc2.queue.new(list2)
+                self.plc1.state = PlcState.AVAILABLE
+                self.plc2.state = PlcState.AVAILABLE
 
     def join(self):
         # bật giao diện khi nhập luồng về __main__

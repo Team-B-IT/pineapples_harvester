@@ -9,14 +9,12 @@ from serial import Serial
 
 class PlcSerialPort():
 	def __init__(self, serialPortName):
-		self.sr = Serial(serialPortName, 9600, timeout=1.0) # open serial port. example for serialPort: '/dev/ttyUSB0'
+		self.sr = Serial(serialPortName, 9600, timeout=2.0) # open serial port. example for serialPort: '/dev/ttyUSB0'
 
 	def serialIn(self):
 		byte = None
 		buffer = b''
-		while byte in [b'\n', b'']:
-			sleep(0.02) # chờ đường truyền ổn định
-			self.sr.flushInput()
+		while byte not in [b'\n', b'']:
 			byte = self.sr.read()
 			buffer = buffer + byte
 		return buffer
