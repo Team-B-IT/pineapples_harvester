@@ -8,13 +8,13 @@ import struct
 class PLC_IO():
 	def __init__(self, PLCName, serialPort):
 		self.name = PLCName
-		self.ser = Serial(serialPort, 9600, timeout=2.0) # open serial port. example for serialPort: '/dev/ttyUSB0'
+		self.ser = Serial(serialPort, 9600, timeout=1.0) # open serial port. example for serialPort: '/dev/ttyUSB0'
 		self.physic = {'x': 200, 'y': 200}
 		self.delta = {'x': 30, 'y': 30}
 
 	def serialIn(self):
 		c = '' # đọc vào từ serial
-		t = 0 # tổng 
+		t = 0 # tổng
 		a = 0 # giá trị đọc từ serial chuyển từ byte sang số nguyên
 		sleep(0.02)
 		buffer = b''
@@ -28,7 +28,6 @@ class PLC_IO():
 			a = int.from_bytes(c, "big")
 			t = t + a
 			sleep(0.02)
-		
 		# print(buffer)
 		self.ser.flushInput()
 		return t

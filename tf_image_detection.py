@@ -44,7 +44,7 @@ colors = list(
                 colors))
 
 def detect_image(image, image_name): 
-    boxed_image = letterbox_image(image, (416, 416))
+    boxed_image = letterbox_image(image, (416, 416)) #416.416
     image_data = np.array(boxed_image, dtype='float32')
     image_data /= 255.
     image_data = np.expand_dims(image_data, 0)  # Add batch dimension.

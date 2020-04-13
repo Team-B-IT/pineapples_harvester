@@ -101,6 +101,6 @@ class realSenseStream():
 
 if __name__ == '__main__':
     rss = realSenseStream()
-    for i in range(5):
+    for i in range(10):
         rss.take_image()
         time.sleep(1)

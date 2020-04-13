@@ -62,6 +62,12 @@ def boxesToCoordinates(boxList, depthDataFile):
         rx, ry, rz = i2c.to_coord_from_depth(x, y, depth)
         # thêm tọa độ đã chuyển vào danh sách
         pineappleCoordinateList.append({ 'real_x': rx, 'real_y': ry, 'real_z': rz })
+
+        # log
+        print('Depth: ', depth)
+        print ('Camera POV (X,Y,Z):', rx, ry, rz)
+        print('Score: ', box['score'])
+
     return pineappleCoordinateList
 
 # Loại bỏ các box cùng khoanh vào 1 quả dứa
@@ -114,20 +120,25 @@ def drawBoxesOnImage(image, boxList, coordList):
 if __name__ == "__main__":
     # test anti duplication
     # trường hợp đơn giản
-    print(boxesAntiDuplication([
-        {'top':0, 'bottom': 10, 'left': 0, 'right': 10},
-        {'top':6, 'bottom': 9, 'left': -1, 'right': 11},
-    ]))
+    # print(boxesAntiDuplication([
+    #     {'top':0, 'bottom': 10, 'left': 0, 'right': 10},
+    #     {'top':6, 'bottom': 9, 'left': -1, 'right': 11},
+    # ]))
     # trường hợp không xảy ra: 3 box đè nhau (tuy nhiên vẫn nên xét tới)
     # nó cho kết quả không mong muốn khi có > 2 box cùng khoanh vào 1 quả dứa
-    print(boxesAntiDuplication([
-        {'top':2, 'bottom': 8, 'left': 2, 'right': 8},
-        {'top':0, 'bottom': 10, 'left': 0, 'right': 10},
-        {'top':6, 'bottom': 9, 'left': -1, 'right': 11},
-    ]))
+    # print(boxesAntiDuplication([
+    #     {'top':2, 'bottom': 8, 'left': 2, 'right': 8},
+    #     {'top':0, 'bottom': 10, 'left': 0, 'right': 10},
+    #     {'top':6, 'bottom': 9, 'left': -1, 'right': 11},
+    # ]))
     # trường hợp có thể xảy ra: quả dứa A có box body lọt vào box full của quả dứa B, song, quả dứa B cũng hiện box body
-    print(boxesAntiDuplication([
-        {'top':1, 'bottom': 6, 'left': 2, 'right': 8},
-        {'top':0, 'bottom': 10, 'left': 0, 'right': 10},
-        {'top':6, 'bottom': 9, 'left': -1, 'right': 11},
-    ]))
+    # print(boxesAntiDuplication([
+    #     {'top':1, 'bottom': 6, 'left': 2, 'right': 8},
+    #     {'top':0, 'bottom': 10, 'left': 0, 'right': 10},
+    #     {'top':6, 'bottom': 9, 'left': -1, 'right': 11},
+    # ]))
+
+    print(utils.rectangleCollision(
+        {'top':40, 'bottom': 40, 'left': 50, 'right': 50},
+        {'top':20, 'bottom': 20, 'left': 30, 'right': 30},
+    ))

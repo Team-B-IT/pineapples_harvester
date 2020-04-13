@@ -4,9 +4,9 @@ imgw = 1280
 imgh = 720
 a = radians(42.5) # camera vertical view angle +/-3,, goc mo cua cam theo phuong doc
 b = radians(69.4) # camera horizontal view angle +/-3, goc mo cua cam theo phuong ngang
-cameraHeight = 171 #1m4
+cameraHeight = 129 #1m4
 
-angleToHorizon = 50 #goc ss mp ngang=35 do 
+angleToHorizon = 36 #goc ss mp ngang=35 do 1,29h / 83cm x
 aGAO = radians(90-angleToHorizon) # camera optical angle (to x-axis)  # goc cua camerg ngang 50 la so mat phan
 #tu dong 10 den dong 46 klo can thiet
 
@@ -65,6 +65,8 @@ def to_coord_from_depth(x, y, depth):
 	#ry = int(ry)
 	# depth += 5.0
 	rz = cameraHeight - sqrt(depth * depth - (rx * rx + ry * ry))
+	rx = rx*1.08
+	ry = ry*1.2
 	depth = float("{0:.2f}".format(depth))
 	rx = float("{0:.2f}".format(rx))
 	ry = float("{0:.2f}".format(ry))

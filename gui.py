@@ -55,8 +55,13 @@ class App: # Giao dien hien thi
         self.window.after(self.delay, self.update)
 
     def updatePhotoCanvasImage(self, boxes_photo):
-        # chỉnh độ phân giải ảnh
-        self.boxes_photo = boxes_photo.resize((930, 756), Image.ANTIALIAS)
-        self.boxes_photo = ImageTk.PhotoImage(image=boxes_photo)
+        #frame1 = self.realSenseStream.get_frame()
+        # chỉnh độ phân giải ảnh 
+        # frame1 = self.realSenseStream.get_frame()
+        # self.boxes_photo = ImageTk.PhotoImage(image=Image.fromarray(frame1))
+        # # cập nhật lên canvas
+        # self.photoCanvas.create_image(0, 0, image=self.boxes_photo,anchor=tkinter.NW)
+        self.boxes_photo = boxes_photo.resize((930, 756))
+        self.boxes_photo = ImageTk.PhotoImage(image=self.boxes_photo)
         # cập nhật lên canvas
         self.photoCanvas.create_image(0, 0, image=self.boxes_photo,anchor=tkinter.NW)

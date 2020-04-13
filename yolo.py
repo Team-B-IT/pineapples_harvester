@@ -24,9 +24,9 @@ class YOLO(object):
         "model_path": 'trained_weights_final.h5',
         "anchors_path": 'model_data/yolo_anchors.txt',
         "classes_path": 'model_data/pineapple_classes.txt',
-        "score" : 0.05,   #0.1 ,ban dau là 0.05
+        "score" : 0.1,   #0.1 ,ban dau là 0.05
         "iou" : 0.35,      #0.35 , ban đầu là 0.35
-        "model_image_size" : (416, 416),
+        "model_image_size" : (416, 416),    #ban dau là 416,416
         "gpu_num" : 1,
     }
 
@@ -176,7 +176,7 @@ class YOLO(object):
 
         print('Found {} boxes for {}'.format(len(out_boxes), 'img'))
 
-        font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', size=np.floor(3e-2 * image.size[1] + 0.5).astype('int32'))
+        font = ImageFont.truetype(os.path.normpath("fonts/FreeMono.ttf"), 24)
         thickness = (image.size[0] + image.size[1]) // 300
 
         for i, c in reversed(list(enumerate(out_classes))):

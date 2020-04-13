@@ -8,6 +8,7 @@ from gui import App
 from utils.realSenseDepth import realSenseStream
 from detect import *
 from PIL import Image
+import operator #hỗ trợ kết nối cam và openCV
 
 from yolo import YOLO
 
@@ -18,15 +19,15 @@ class HardwareControlThread(Thread):
     def __init__(self):
         super().__init__()
         # Thiết lập 2 luồng cho 2 tay cắt
-        self.plcThread1 = PLC1('PLC 1', '/dev/ttyUSB0', rs)
-        self.plcThread2 = PLC2('PLC 2', '/dev/ttyUSB1')
+        self.plcThread1 = PLC1('PLC 1', 'COM3', rs)
+        self.plcThread2 = PLC2('PLC 2', 'COM4')
         self.cutTime = 0
         # self._stop_flag = None
 
     def run(self):
         gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.5)
         config = tf.ConfigProto(gpu_options=gpu_options)
-        # config.gpu_options.allow_growth = True 
+        # config.gpu_options.allow_growth = True
         sess = tf.Session(config=config)
         set_session(sess)
 
@@ -40,8 +41,6 @@ class HardwareControlThread(Thread):
         # self._stop_flag = False
         while True:
             # nếu đã quét 2 lần thì thôi, không cần quét nữa, đi tiếp
-            if self.cutTime >= 2:
-                self.resetPlcs()
             
             # chờ lệnh chụp ảnh
             while self.plcThread1.imageInfo == None:
@@ -49,23 +48,23 @@ class HardwareControlThread(Thread):
 
             imageInfo = self.plcThread1.imageInfo
             self.plcThread1.imageInfo = None
-            image = Image.open(imageInfo['imagePath'])  
-            
+            image = Image.open(imageInfo['imagePath'])
+
             # cập nhật lại ảnh vừa chụp lên màn hình
             app.updatePhotoCanvasImage(image)
-            
+
             # nhận diện dứa
             boxList = detector.raw_detect_image(image)
-           
+
             # phân loại dứa theo mode
             boxList = classifyPineappleByMode(boxList, self.plcThread1.mode)
-            
+
             # loại bỏ các box trùng lặp
             boxList = boxesAntiDuplication(boxList)
 
             # lấy tọa độ của cac box
             coordList = boxesToCoordinates(boxList, imageInfo['depthDataPath'])
-            
+
             # vẽ box lên ảnh
             drawBoxesOnImage(image, boxList, coordList)
             # không nhận được quả nào
@@ -74,35 +73,45 @@ class HardwareControlThread(Thread):
             #     continue
             # lưu ảnh
             image.save('./result/' + imageInfo['imagePath'].split('/')[-1]) # luu anh, comment dong nay de tranh full memory]
-            
+
             # cập nhật lại ảnh đã đánh box lên màn hình
-            app.updatePhotoCanvasImage(image)
+            app.updatePhotoCanvasImage(image)      
             for box in coordList:
                 # chia dứa ra 2 list cho 2 PLC
                 if box['real_x'] < 0: # PLC 1
                     self.plcThread1.boxList.append(box) # them vao danh sach cat PLC 1
+                    self.plcThread1.boxList.sort(key=operator.itemgetter('real_x'))
                 else:
                     self.plcThread2.boxList.append(box) # them vao danh sach cat PLC 2
+                    self.plcThread2.boxList.sort(key=operator.itemgetter('real_x'))
+            
             while len(self.plcThread1.boxList) != 0 or len(self.plcThread2.boxList) != 0:
-                if self.plcThread1.state == State.RESET:
+                if self.plcThread1.state == State.RESET or self.plcThread2.state == State.RESET:
                     # reset tức thời
-                    self.cutTime = 2
+                    self.cutTime = -1
                     break
                 continue
-
-            self.cutTime = self.cutTime + 1
-            # không reset tay vội, cho nó chụp thêm xem con` dứa không
-            self.plcThread1.state = State.TAKEIMAGE
-            self.plcThread2.state = State.TAKEIMAGE
+            
+            if self.cutTime < 0:
+                self.cutTime = 0
+                continue
+            elif self.cutTime < 1:
+                self.cutTime = self.cutTime + 1
+                # không reset tay vội, cho nó chụp thêm xem con` dứa không
+                self.plcThread1.state = State.TAKEIMAGE
+                self.plcThread2.state = State.TAKEIMAGE
+                continue
+            else:
+                self.cutTime = 0
+                self.resetPlcs()
+                continue
 
     def resetPlcs(self):
         # soft reset
-        self.cutTime = 0
         self.plcThread1.ser.serialOut(0, 0, 10)
         self.plcThread2.ser.serialOut(0, 0, 0)
         self.plcThread1.state = State.START
         self.plcThread2.state = State.START
-
     def join(self):
         # bật giao diện khi nhập luồng về __main__
         app.window.mainloop()
@@ -115,7 +124,7 @@ class HardwareControlThread(Thread):
         self.plcThread2._stop()
         sleep(0.2)
         super().join()
-        
+
 
 if __name__ == "__main__":
     global rs, app
@@ -123,7 +132,7 @@ if __name__ == "__main__":
     # chạy luồng điều khiển
     controlThread = HardwareControlThread()
     controlThread.start()
-    
+
     # khởi chạy giao diện
     app = App(Tk(), "PINEAPPLE", rs)
     app.realSenseStream = rs
