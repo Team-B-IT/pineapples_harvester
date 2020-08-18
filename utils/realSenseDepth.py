@@ -57,7 +57,8 @@ class realSenseStream():
 
 
             # Convert images to numpy arrays 
-            name = str(int(time.time()*1000.0))
+            # name = str(int(time.time()*1000.0))
+            name = 'tmp'
             color_image = np.asanyarray(color_frame.get_data())
             imgName = self.path + name + '.jpeg'
             dataName = self.path + name + '.txt'

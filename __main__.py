@@ -1,3 +1,4 @@
+import os
 from time import sleep
 from tkinter import Tk
 from threading import Thread
@@ -137,6 +138,11 @@ class HardwareControlThread(Thread):
 
 if __name__ == "__main__":
     global rs, app
+    ld = os.listdir()
+    if 'result' not in ld:
+        os.mkdir('result')
+    if 'running_data' not in ld:
+        os.mkdir('running_data')
     rs = realSenseStream('./running_data')
     # chạy luồng điều khiển
     controlThread = HardwareControlThread()

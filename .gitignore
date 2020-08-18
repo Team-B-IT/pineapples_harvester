@@ -65,3 +65,6 @@ coverage.xml
 
 # Vs code
 .vscode
+
+running_data/
+result/
