@@ -15,12 +15,18 @@ from yolo import YOLO
 import tensorflow as tf
 from keras.backend.tensorflow_backend import set_session
 
+import tkinter
+from PIL import Image, ImageTk #hỗ trợ xử lí khung ahrn
+from tkinter import messagebox
+
+from utils.realSenseDepth import realSenseStream #hàm tính chiều sâu camera
+
 class HardwareControlThread(Thread):
     def __init__(self):
         super().__init__()
-        # Thiết lập 2 luồng cho 2 tay cắt
-        self.plcThread1 = PLC1('PLC 1', 'COM3', rs)
-        self.plcThread2 = PLC2('PLC 2', 'COM4')
+        # Thiết lập dia chi cong COM cua 2 PLC
+        self.plcThread1 = PLC1('PLC 1', 'COM5', rs) 
+        self.plcThread2 = PLC2('PLC 2', 'COM6')
         self.cutTime = 0
         # self._stop_flag = None
 
@@ -86,28 +92,31 @@ class HardwareControlThread(Thread):
                     self.plcThread2.boxList.sort(key=operator.itemgetter('real_x'))
             
             while len(self.plcThread1.boxList) != 0 or len(self.plcThread2.boxList) != 0:
+                
                 if self.plcThread1.state == State.RESET or self.plcThread2.state == State.RESET:
                     # reset tức thời
-                    self.cutTime = -1
+                    self.cutTime = 0
+                    self.resetPlcs()
                     break
                 continue
-            
-            if self.cutTime < 0:
+            if self.cutTime < 1:
                 self.cutTime = 0
+                self.resetPlcs()
                 continue
-            elif self.cutTime < 1:
-                self.cutTime = self.cutTime + 1
+ #           if self.cutTime >= 1:
+ #               self.cutTime = self.cutTime + 1
+ #               if self.cutTime > 2:
+ #                   self.cutTime = 0
+ #                   self.resetPlcs()
+ #               continue
                 # không reset tay vội, cho nó chụp thêm xem con` dứa không
                 self.plcThread1.state = State.TAKEIMAGE
                 self.plcThread2.state = State.TAKEIMAGE
                 continue
-            else:
-                self.cutTime = 0
-                self.resetPlcs()
-                continue
 
     def resetPlcs(self):
         # soft reset
+        self.cutTime = 0
         self.plcThread1.ser.serialOut(0, 0, 10)
         self.plcThread2.ser.serialOut(0, 0, 0)
         self.plcThread1.state = State.START

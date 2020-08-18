@@ -124,36 +124,41 @@ class PLC1(PLCASync):
 
 	# kiểm tra tọa độ có hợp lệ không
 	def plc1CoordinateValidator(self, raw_x, raw_y, raw_z):
-		#y = int(raw_y)-59-21, -59 (mép ngoài) là khoảng cách từ camera đến khung, 21 từ khung đến trục thân xilanh trục y
-		#231 khoảng cách hai mép trong, 59 từ cam đến mép trong, 23 từ mép trong đến cánh tay
-		y = 275  - int(raw_y)    # chieu truc X cua camera# doi tu toa do cam sang toa do khung PLC1 #80
-		#x = 100-20, 100 là giới hạn một nửa khoảng thu hoạch (mép trong), 20 thân xylanh đến khung theo trục x
-		#14 từ cánh tay đến mép trong
-		x = 87 + int(raw_x)   # chieu truc Y cua camera # doi tu toa do cam sang toa do khung PLC1 #184
+		# y (là độ dài từ Y^home1 đến quả dứa có tọa độ thực so với cammera)
+		# - khoảng Y^cammera đến home 1, home 2 là 215 + 55 = 270 cm . trong đó 215 là từ home12 đến mép trong của khung và 55 là k/c từ cam đến mép trong
+		#sai số +-5cm
+		y = 260  - int(raw_y) 
+		# * Khoảng cách giữa X^home1, X^home2 là 165cm / ước lượng vùng hoạt động của X^home1=85 , Xhome2= 80 
+		# x (là độ dài từ X^home1 đến quả dứa có tọa độ thực so với cammera)
+		x = 85 + int(raw_x)   # chieu truc Y cua camera # doi tu toa do cam sang toa do khung PLC1 #184
 		if y < 0 and abs(y) <= 5:
 			y = 0
-		if y > 180 and y < 210 : #gán giới hạn trên trục Y
+		if y > 180 and y < 220 : #gán giới hạn trên trục Y
 			y = 185 
 		if y > 43 and y < 58 :   #gán giới hạn dưới1 trục Y
 			y = 51 
 		if y >=58 and y < 65 :   # gán giới hạn dưới2 trục Y
 			y = 55 
-		if x <=10  : # gán giới hạn dưới trục X
-			x = 3
-		if y > 170 and x < 30: # gán giới hạn quả ngoài cùng hàng 1( gần cammera nhất)
-			y = 185
-			x = 5
-		if y > 145 and y<= 166 and x <= 18: # giới hạn quả ngoài cùng hàng 2 
-			y = 145
-			x = 5 
+		if x <=25 and x >= 0  : # gán giới hạn dưới trục X
+			x = 0
+		if x <=35 and x >= 26  : # gán giới hạn dưới trục X
+			x = 30
+		if x <=85 and x >= 75  : # gán giới hạn dưới trục X
+			x = 73
+		#if y > 170 and x < 30: # gán giới hạn quả ngoài cùng hàng 1( gần cammera nhất)
+		#	y = 185
+		#	x = 5
+		#if y > 145 and y<= 166 and x <= 18: # giới hạn quả ngoài cùng hàng 2 
+		#	y = 145
+		#	x = 5 
 		if int(raw_z) < 70 :
 			z = 3
 		if int(raw_z) >= 70 and int(raw_z) <= 80 :
-			z = 4
+			z = 3
 		if int(raw_z) > 80:
-			z = 5
+			z = 3
 		print ('Xi lanh 1 POV -PLC1 x y z:', x, y, z)
-		if 51 <= y <= 185 and  0 <= x <= 87:
+		if 51 <= y <= 185 and  20 <= x <= 73:
 			# Nếu nằm trong tầm cắt trả về tọa độ
 			return {'x': x, 'y': y, 'z': z}
 		# Không nằm trong tầm cắt thì không trả về gì
@@ -167,36 +172,36 @@ class PLC2(PLCASync):
 
 	# kiểm tra tọa độ có hợp lệ không
 	def plc2CoordinateValidator(self, raw_x, raw_y, raw_z):
-		#y = int(raw_y)-59-21, -59 (mép ngoài) là khoảng cách từ camera đến khung, 21 từ khung đến trục thân xilanh trục y
-		#231 khoảng cách hai mép trong, 59 từ cam đến mép trong, 23 từ mép trong đến cánh tay
-		y = 275  - int(raw_y)    # chieu truc X cua camera# doi tu toa do cam sang toa do khung PLC1 #80
-		#x = 100-20, 100 là giới hạn một nửa khoảng thu hoạch (mép trong), 20 thân xylanh đến khung theo trục x
-		#14 từ cánh tay đến mép trong
-		x = 87 - int(raw_x)   # chieu truc Y cua camera # doi tu toa do cam sang toa do khung PLC1 #184
+		y = 257  - int(raw_y)
+		x = 90 - int(raw_x)   
 		if y < 0 and abs(y) <= 5:
 			y = 0
-		if y > 180 and y < 210 : #gán giới hạn trên trục Y
+		if y > 180 and y < 220 : #gán giới hạn trên trục Y
 			y = 185 
 		if y > 43 and y < 58 :   #gán giới hạn dưới1 trục Y
 			y = 51 
 		if y >=58 and y < 65 :   # gán giới hạn dưới2 trục Y
 			y = 55 
-		if x <=10  : # gán giới hạn dưới trục X
-			x = 3
-		if y > 170 and x < 30: # gán giới hạn quả ngoài cùng hàng 1( gần cammera nhất)
-			y = 185
-			x = 5
-		if y > 145 and y<= 166 and x <= 18: # giới hạn quả ngoài cùng hàng 2 
-			y = 145
-			x = 5 
+		if x <=25 and x >= 0 : # gán giới hạn dưới trục X
+			x = 0
+		if x <=90 and x >= 65 : # gán giới hạn dưới trục X
+			x = 73
+		if x <=35 and x >= 26 : # gán giới hạn dưới trục X
+			x = 30
+		#if y > 170 and x < 30: # gán giới hạn quả ngoài cùng hàng 1( gần cammera nhất)
+		#	y = 185
+		#	x = 5
+		#if y > 145 and y<= 166 and x <= 18: # giới hạn quả ngoài cùng hàng 2 
+		#	y = 145
+		#	x = 5 
 		if int(raw_z) < 70 :
 			z = 3
 		if int(raw_z) >= 70 and int(raw_z) <= 80 :
-			z = 4
+			z = 3
 		if int(raw_z) > 80:
-			z = 5
+			z = 3
 		print ('Xi lanh 2 POV -PLC2 X Y Z:', x, y, z)
-		if 51 <= y <= 185 and  0 <= x <= 75:
+		if 51 <= y <= 185 and  20 <= x <= 73:
 			# Nếu nằm trong tầm cắt trả về tọa độ
 			return {'x': x, 'y': y, 'z': z}
 		# Không nằm trong tầm cắt thì không trả về gì
